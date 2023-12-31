@@ -11,8 +11,11 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
-  -- cattpuccin
-  use { "catppuccin/nvim", as = "catppuccin" }
+  -- colorschemes
+  use{ "catppuccin/nvim", as = "catppuccin" }
+  use{ 'rose-pine/neovim', as = 'rose-pine' }
+  -- vim be goodat
+  use { "uewekenuewe/vim-be-good"}
 
   -- treesitter 
       use {
@@ -26,7 +29,6 @@ return require('packer').startup(function(use)
     --- Uncomment these if you want to manage LSP servers from neovim
     {'williamboman/mason.nvim'},
     {'williamboman/mason-lspconfig.nvim'},
-
     -- LSP Support
     {'neovim/nvim-lspconfig'},
     -- Autocompletion
