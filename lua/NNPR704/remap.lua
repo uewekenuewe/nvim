@@ -12,4 +12,12 @@ vim.keymap.set('n', '<c-s>', ":w!<CR>")
 vim.keymap.set('n', '<c-q>', ":q!<CR>")
 
 vim.keymap.set({'i','v','n'}, '<c-f>', ":/")
-vim.keymap.set({'i','v','n'}, '<c-s>', ":s/")
+--vim.keymap.set({'i','v','n'}, '<c-s>', ":s/")
+
+vim.keymap.set({'v','n'}, '<c-z>', ":u <CR>")
+
+-- disable arrow keys
+vim.keymap.set({'i','v','n'}, '<Up>','<Nop>')
+vim.keymap.set({'i','v','n'}, '<Left>','<Nop>')
+vim.keymap.set({'i','v','n'}, '<Right>','<Nop>')
+vim.keymap.set({'i','v','n'}, '<Down>','<Nop>')

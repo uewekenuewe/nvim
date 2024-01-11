@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
   use{ "catppuccin/nvim", as = "catppuccin" }
   use{ 'rose-pine/neovim', as = 'rose-pine' }
   -- vim be goodat
-  use { "uewekenuewe/vim-be-good"}
+  use { "uewekenuewe/vim-be-good", branch="LogHighscore"}
 
   -- treesitter 
       use {
