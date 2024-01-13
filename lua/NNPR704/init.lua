@@ -14,3 +14,11 @@ vim.g.vim_be_good_save_highscore = true
 
 -- enable clipboard windows
 vim.opt.clipboard="unnamedplus"
+
+-- indenting
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
