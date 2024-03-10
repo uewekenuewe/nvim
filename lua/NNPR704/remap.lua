@@ -1,6 +1,9 @@
 local builtin = require('telescope.builtin')
 
 vim.g.mapleader = " "
+
+vim.keymap.set({"i","n","v"},"<TAB>","<ESC>")
+
 -- Autocomplete some chars
 vim.keymap.set("i", "\"", "\"\"<ESC>i")
 vim.keymap.set("i", "(", "()<ESC>i")
