@@ -32,7 +32,7 @@ vim.keymap.set({'i','v','n'}, '<Left>','<Nop>')
 vim.keymap.set({'i','v','n'}, '<Right>','<Nop>')
 vim.keymap.set({'i','v','n'}, '<Down>','<Nop>')
 
-vim.keymap.set({'i','v','n'}, '<leader>l',function ()
+vim.keymap.set({'v','n'}, '<leader>l',function ()
     vim.print("starting lsp server")
     vim.lsp.set_log_level(2)
     vim.lsp.start({
