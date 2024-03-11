@@ -12,9 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- colorsheme
---vim.cmd.colorscheme 'nord'
-
 -- leader has to be set before lazy
 vim.g.mapleader = " "
 
@@ -23,6 +20,9 @@ require("NNPR704.lazy")
 
 -- all remaps
 require("NNPR704.remap")
+
+-- colorsheme
+vim.cmd("colorscheme nord")
 
 -- line numbers
 vim.wo.relativenumber = true

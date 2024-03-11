@@ -36,7 +36,16 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- find stuff
-vim.keymap.set({ 'v', 'n' }, "<leader>fw", ":/" .. vim.fn.expand("<cword>") .. "<CR>")
+-- if you on top a word find all words in buffer cursor does not change position
+-- \\todo better way to do non movement
+-- \\if multiple occurences cursor still moves
+vim.keymap.set({ 'v', 'n' }, "<leader>fw", function()
+    local _word = vim.fn.expand("<cword>")
+    local _curs = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("/".._word)
+    vim.api.nvim_input("N")
+    vim.api.nvim_set_cursor(0,_curs)
+end)
 
 -- replace stuff
 --vim.keymap.set({ 'v', 'n' }, "<leader>sw", ":s/"..vim.fn.expand("<cword>").."/")
