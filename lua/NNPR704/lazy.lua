@@ -10,6 +10,7 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     'ryanoasis/vim-devicons',
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
+    { 'christoomey/vim-tmux-navigator', lazy=false },
     { 'neovim/nvim-lspconfig' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
