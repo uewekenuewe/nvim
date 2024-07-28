@@ -17,4 +17,5 @@ require("lazy").setup({
     { 'L3MON4D3/LuaSnip' },
 -- colorscheme
     'shaunsingh/nord.nvim',
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 })

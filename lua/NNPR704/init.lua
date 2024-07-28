@@ -22,7 +22,7 @@ require("NNPR704.lazy")
 require("NNPR704.remap")
 
 -- colorsheme
-vim.cmd("colorscheme nord")
+vim.cmd("colorscheme catppuccin-frappe")
 
 -- line numbers
 vim.wo.relativenumber = true

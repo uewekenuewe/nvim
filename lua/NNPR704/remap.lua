@@ -50,6 +50,21 @@ end)
 -- replace stuff
 --vim.keymap.set({ 'v', 'n' }, "<leader>sw", ":s/"..vim.fn.expand("<cword>").."/")
 
+
+-- start LSP Server 
+vim.keymap.set({'n'}, "<leader>l", function ()
+	print("start lsp server")
+    vim.lsp.start({
+	name = "cbl-lsp-go",
+	cmd = { "/home/uwe/projects/cbl-lsp-go/cbl-lsp-go" },
+	root_dir = vim.fn.getcwd(),
+})
+
+
+end)
+
+
+
 -- tab and buffer management
 -- new buffer stuff
 vim.keymap.set({ 'n' }, "<leader>sv", ":vsplit new<CR>")
