@@ -3,7 +3,7 @@ require("lazy").setup({
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
-        dependencies = { 'nvim-lua/plenary.nvim' }
+        dependencies = { 'nvim-lua/plenary.nvim' },
     },
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -18,4 +18,6 @@ require("lazy").setup({
 -- colorscheme
     'shaunsingh/nord.nvim',
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    -- golang doc
+    "blacktrub/telescope-godoc.nvim",
 })

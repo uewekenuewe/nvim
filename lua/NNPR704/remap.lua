@@ -11,7 +11,7 @@ vim.keymap.set("n", "<leader>i", vim.lsp.omnifunc)
 
 -- leave hotkeys
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<F4>", ":bd!<CR>")
+vim.keymap.set("n", "<F3>", ":bd!<CR>")
 
 --
 vim.keymap.set('n', '<c-s>', ":w!<CR>")

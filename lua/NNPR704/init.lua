@@ -21,6 +21,9 @@ require("NNPR704.lazy")
 -- all remaps
 require("NNPR704.remap")
 
+-- godoc telescope extension
+require("telescope").load_extension("godoc")
+
 -- colorsheme
 vim.cmd("colorscheme catppuccin-frappe")
 
@@ -35,6 +38,9 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- only 80 chars
+--vim.opt.colorcolumn = "88"
 
 -- indenting
 vim.opt.tabstop = 4
