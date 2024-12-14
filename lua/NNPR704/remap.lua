@@ -35,6 +35,9 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+-- go stuff
+vim.keymap.set('n','<leader>b', ':!go build<CR>')
+
 -- find stuff
 -- if you on top a word find all words in buffer cursor does not change position
 -- \\todo better way to do non movement

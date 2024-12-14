@@ -25,7 +25,7 @@ require("NNPR704.remap")
 require("telescope").load_extension("godoc")
 
 -- colorsheme
-vim.cmd("colorscheme catppuccin-frappe")
+vim.cmd("colorscheme catppuccin")
 
 -- line numbers
 vim.wo.relativenumber = true
@@ -49,8 +49,9 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
--- no swap files
+-- no swap + SHA files
 vim.opt.swapfile = false
+vim.opt.shadafile = "NONE"
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
@@ -59,3 +60,20 @@ vim.opt.smartcase = true
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+
+-- PARSER CONFIG FOR COBOL
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.cobol = {
+  install_info = {
+    url = "~/projects/tree-sitter-cobol/", -- local path or git repo
+    files = {"src/parser.c", "src/scanner.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
+    -- optional entries:
+    branch = "main", -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+  },
+  filetype = "cbl", -- if filetype does not match the parser name
+}
+
+vim.treesitter.language.register('cobol', 'cbl')
