@@ -25,7 +25,7 @@ require("NNPR704.remap")
 require("telescope").load_extension("godoc")
 
 -- colorsheme
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme rose-pine-main")
 
 -- line numbers
 vim.wo.relativenumber = true

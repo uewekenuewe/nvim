@@ -1,13 +1,13 @@
 -- tab to escape due to my keyboard
 vim.keymap.set({ "i", "n", "v" }, "<TAB>", "<ESC>")
 
--- Autocomplete some chars
---vim.keymap.set("i", "\"", "\"\"<ESC>i")
---vim.keymap.set("i", "(", "()<ESC>i")
---vim.keymap.set("i", "[", "[]<ESC>i")
-
 -- vimsp omnifunc for completion testing lsp server
 vim.keymap.set("n", "<leader>i", vim.lsp.omnifunc)
+
+-- delete everything
+vim.keymap.set("n", "<leader>dd", ":%d<CR>")
+-- yank everything
+vim.keymap.set("n", "<leader>yy", ":%y<CR>")
 
 -- leave hotkeys
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -66,8 +66,6 @@ vim.keymap.set({'n'}, "<leader>l", function ()
 
 end)
 
-
-
 -- tab and buffer management
 -- new buffer stuff
 vim.keymap.set({ 'n' }, "<leader>sv", ":vsplit new<CR>")
@@ -78,7 +76,8 @@ vim.keymap.set('n', '<C-h>', '<cmd> TmuxNavigateLeft<CR>', { desc = 'Move focus 
 vim.keymap.set('n', '<C-l>', '<cmd> TmuxNavigateRight<CR>', { desc = 'Move focus to the rigth window' })
 vim.keymap.set('n', '<C-j>', '<cmd> TmuxNavigateDown<CR>', { desc = 'Move focus to the down window' })
 vim.keymap.set('n', '<C-k>', '<cmd> TmuxNavigateUp<CR>', { desc = 'Move focus to the up window' })
- --navigate between windows with hjkl
+
+--navigate between windows with hjkl
 --vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 --vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 --vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })

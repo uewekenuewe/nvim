@@ -12,6 +12,7 @@ require("lazy").setup({
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     'ryanoasis/vim-devicons',
+    { "rose-pine/neovim", name = "rose-pine" },
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
     { 'christoomey/vim-tmux-navigator', lazy=false },
     { 'neovim/nvim-lspconfig' },
