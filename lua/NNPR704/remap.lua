@@ -62,6 +62,17 @@ end)
 vim.keymap.set({'n'}, '<leader>ct', function()
     vim.cmd("InspectTree")
 end)
+-- tree-sitter convert word to regex
+vim.keymap.set({'n'}, '<leader>tw', function()
+   local _word = vim.fn.expand("<cword>")
+   local result = "/"
+   for i=1, #_word do
+       local c = _word:sub(i,i)
+       result = result .. "[" .. string.upper(c) .. string.lower(c) .. "]"
+   end
+   result = result .. "/,"
+   vim.api.nvim_set_current_line(result)
+end)
 
 -- start LSP Server 
 vim.keymap.set({'n'}, "<leader>l", function ()
