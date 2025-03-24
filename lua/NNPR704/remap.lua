@@ -53,6 +53,15 @@ end)
 -- replace stuff
 --vim.keymap.set({ 'v', 'n' }, "<leader>sw", ":s/"..vim.fn.expand("<cword>").."/")
 
+-- tree sitter stuff
+-- update latest cobol language ts 
+vim.keymap.set({'n'}, '<leader>cu', function()
+    vim.cmd("TSUpdate cobol")
+end)
+-- tree-sitter inspect tree
+vim.keymap.set({'n'}, '<leader>ct', function()
+    vim.cmd("InspectTree")
+end)
 
 -- start LSP Server 
 vim.keymap.set({'n'}, "<leader>l", function ()
