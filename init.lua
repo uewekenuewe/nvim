@@ -22,14 +22,34 @@ vim.opt.smartcase = true
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
-
+vim.o.signcolumn = "yes"
 -- remaps
 require('remap')
 
 -- plugins
+ 
+vim.pack.add({
+    {src = "https://github.com/vague2k/vague.nvim"},
+    {src = "https://github.com/echasnovski/mini.pick"},
+})
+
+require("mini.pick").setup({
+{ window = { config = { border = 'double' } } }
+
+
+})
+-- hotkeys for telescope
+vim.keymap.set('n', '<leader>ff', ":Pick files<CR>")
+vim.keymap.set('n', '<leader>fh', ":Pick help<CR>")
+--vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+--vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+--vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+
+vim.cmd("colorscheme vague")
 
 -- lsp
+-- LUA
 vim.lsp.config['luals'] = {
     -- Command and arguments to start the server.
     cmd = { 'lua-language-server' },
