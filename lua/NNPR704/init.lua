@@ -22,7 +22,7 @@ require("NNPR704.lazy")
 require("NNPR704.remap")
 
 -- godoc telescope extension
-require("telescope").load_extension("godoc")
+--require("telescope").load_extension("godoc")
 
 -- colorsheme
 vim.cmd("colorscheme rose-pine-main")
@@ -66,8 +66,8 @@ vim.opt.splitbelow = true
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.cobol = {
   install_info = {
-    url = "~/projekte/tree-sitter-cobol/", -- local path or git repo
-    files = {"src/parser.c"}, --, "src/scanner.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
+    url = "C:\\projekte\\tree-sitter-cobol\\", -- local path or git repo
+    files = {"src/parser.c", "src/scanner.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
     -- optional entries:
     branch = "main", -- default branch in case of git repo if different from master
     generate_requires_npm = false, -- if stand-alone parser without npm dependencies

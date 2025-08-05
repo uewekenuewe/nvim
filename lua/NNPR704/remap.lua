@@ -55,11 +55,11 @@ end)
 
 -- tree sitter stuff
 -- update latest cobol language ts 
-vim.keymap.set({'n'}, '<leader>cu', function()
+vim.keymap.set({'n'}, '<leader>tu', function()
     vim.cmd("TSUpdate cobol")
 end)
 -- tree-sitter inspect tree
-vim.keymap.set({'n'}, '<leader>ct', function()
+vim.keymap.set({'n'}, '<leader>ti', function()
     vim.cmd("InspectTree")
 end)
 -- tree-sitter convert word to regex
@@ -79,7 +79,8 @@ vim.keymap.set({'n'}, "<leader>l", function ()
 	print("start lsp server")
     vim.lsp.start({
 	name = "cbl-lsp-go",
-	cmd = { "/home/uwe/projects/cbl-lsp-go/cbl-lsp-go" },
+	--cmd = { "/home/uwe/projects/cbl-lsp-go/cbl-lsp-go" },
+	cmd = { "c:\\projekte\\cbl-lsp-go\\bin\\cbl-lsp-go.exe" },
 	root_dir = vim.fn.getcwd(),
 })
 
