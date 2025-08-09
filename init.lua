@@ -59,7 +59,7 @@ require("mini.pick").setup({
 -- hotkeys for telescope
 vim.keymap.set('n', '<leader>ff', ":Pick files<CR>")
 vim.keymap.set('n', '<leader>fh', ":Pick help<CR>")
---vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fg', ":Pick grep_live<CR>")
 --vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 --vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
