@@ -24,8 +24,14 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.o.signcolumn = "yes"
 
+-- help help in full mode
+vim.o.helpheight=99999
+
 -- remaps
 --require('remap')
+-- splitting
+vim.keymap.set("n", "<leader>sv", ":vnew<CR>")
+vim.keymap.set("n", "<leader>sh", ":new<CR>")
 -- delete everything
 vim.keymap.set("n", "<leader>dd", ":%d<CR>")
 -- yank everything
@@ -38,10 +44,46 @@ vim.keymap.set('n', '<c-s>', ":w!<CR>")
 vim.keymap.set('n', '<c-q>', ":q!<CR>")
 -- search 
 vim.keymap.set({ 'i', 'v', 'n' }, '<c-f>', ":/")
+-- general lsp remaps
+vim.keymap.set({'n'}, '<leader>qf', function()
+    vim.diagnostic.setqflist()
+    vim.cmd("resize 5<CR>")
+end)
 
+perma_lsp_qf = false
+vim.keymap.set({'n'}, '<leader>lqf', function()
+    if(perma_lsp_qf) then
+        perma_lsp_qf = false
+        vim.print("lsp perma quickfix is off")
+    else
+        perma_lsp_qf = true
+        vim.print("lsp perma quickfix is on")
+    end
+end)
+
+--[[
+--- `]d` jumps to the next diagnostic in the buffer. |]d-default|
+- `[d` jumps to the previous diagnostic in the buffer. |[d-default|
+- `]D` jumps to the last diagnostic in the buffer. |]D-default|
+- `[D` jumps to the first diagnostic in the buffer. |[D-default|
+- `<C-w>d` shows diagnostic at cursor in a floating window. |CTRL-W_d-default|
+
+--]]
+-- autocommands
+-- if diagnostic event updates come put them into quickfix list 
+vim.api.nvim_create_autocmd('DiagnosticChanged', {
+    callback = function(args)
+        local diagnostics = args.data.diagnostics
+        local current_window = vim.api.nvim_get_current_win()
+        if(perma_lsp_qf) then
+            vim.diagnostic.setqflist()
+            vim.cmd("resize 5<CR>")
+            vim.api.nvim_set_current_win(current_window)
+        end
+    end,
+})
 
 -- plugins
- 
 vim.pack.add({
     {src = "https://github.com/vague2k/vague.nvim"},
     {src = "https://github.com/echasnovski/mini.pick"},
