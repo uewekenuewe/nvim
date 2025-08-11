@@ -50,15 +50,22 @@ vim.keymap.set({'n'}, '<leader>qf', function()
     vim.cmd("resize 5<CR>")
 end)
 
-perma_lsp_qf = false
+PERMA_LSP_QF = false
 vim.keymap.set({'n'}, '<leader>lqf', function()
-    if(perma_lsp_qf) then
-        perma_lsp_qf = false
+    if(PERMA_LSP_QF) then
+        PERMA_LSP_QF = false
         vim.print("lsp perma quickfix is off")
     else
-        perma_lsp_qf = true
+        PERMA_LSP_QF = true
         vim.print("lsp perma quickfix is on")
     end
+end)
+
+-- remap for cobol sourounding with display
+vim.keymap.set('n', '<leader>cdw', function()
+    local current_word = vim.cmd('<cword><CR>')
+    vim.print(current_word)
+
 end)
 
 --[[
@@ -73,9 +80,8 @@ end)
 -- if diagnostic event updates come put them into quickfix list 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
     callback = function(args)
-        local diagnostics = args.data.diagnostics
         local current_window = vim.api.nvim_get_current_win()
-        if(perma_lsp_qf) then
+        if(PERMA_LSP_QF) then
             vim.diagnostic.setqflist()
             vim.cmd("resize 5<CR>")
             vim.api.nvim_set_current_win(current_window)
@@ -86,25 +92,23 @@ vim.api.nvim_create_autocmd('DiagnosticChanged', {
 -- plugins
 vim.pack.add({
     {src = "https://github.com/vague2k/vague.nvim"},
-    {src = "https://github.com/echasnovski/mini.pick"},
+    {src = "https://github.com/nvim-telescope/telescope.nvim"},
+    {src = "https://github.com/nvim-lua/plenary.nvim"},
 })
 
--- mini picker config
-require("mini.pick").setup({
-    window = {
-      config = {
-        relative = 'cursor', anchor = 'NW',
-        row = 0, col = 0, width = 800, height = 600,
-      },
-    },
- })
 -- hotkeys for telescope
-vim.keymap.set('n', '<leader>ff', ":Pick files<CR>")
-vim.keymap.set('n', '<leader>fh', ":Pick help<CR>")
-vim.keymap.set('n', '<leader>fg', ":Pick grep_live<CR>")
---vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
---vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+require('telescope').setup{
+    defaults = {
+        layout_strategy = 'horizontal',
+      layout_config = { height = 0.95 },
+    },
+}
 
 vim.cmd("colorscheme vague")
 
@@ -125,6 +129,9 @@ vim.lsp.config['luals'] = {
         Lua = {
             runtime = {
                 version = 'LuaJIT',
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("",true),
             }
         }
     }
