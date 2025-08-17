@@ -39,6 +39,8 @@ vim.keymap.set("n", "<leader>yy", ":%y<CR>")
 -- leave hotkeys
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<F3>", ":bd!<CR>")
+
+
 -- save and quit 
 vim.keymap.set('n', '<c-s>', ":w!<CR>")
 vim.keymap.set('n', '<c-q>', ":q!<CR>")
@@ -93,15 +95,17 @@ vim.api.nvim_create_autocmd('DiagnosticChanged', {
 vim.pack.add({
     {src = "https://github.com/vague2k/vague.nvim"},
     {src = "https://github.com/nvim-telescope/telescope.nvim"},
+    {src = "https://github.com/neovim/nvim-lspconfig"},
+    {src = "https://github.com/dstein64/vim-startuptime"},
     {src = "https://github.com/nvim-lua/plenary.nvim"},
 })
 
 -- hotkeys for telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', telescope.find_files, {})
+vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
+vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
+vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
 
 require('telescope').setup{
     defaults = {
@@ -113,48 +117,34 @@ require('telescope').setup{
 vim.cmd("colorscheme vague")
 
 -- lsp
--- LUA
-vim.lsp.config['luals'] = {
-    -- Command and arguments to start the server.
-    cmd = { 'lua-language-server' },
-    -- Filetypes to automatically attach to.
-    filetypes = { 'lua' },
-    -- Sets the 'workspace' to the directory where any of these files is found.
-    -- Files that share a root directory will reuse the LSP server connection.
-    -- Nested lists indicate equal priority, see |vim.lsp.Config|.
-    root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
-    -- Specific settings to send to the server. The schema is server-defined.
-    -- Example: https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json
-    settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("",true),
-            }
-        }
-    }
-}
-
--- odin
-vim.lsp.config['ols'] = {
-    -- Command and arguments to start the server.
-    cmd = { 'ols' },
-    -- Filetypes to automatically attach to.
-    filetypes = { 'odin' },
-    -- Sets the 'workspace' to the directory where any of these files is found.
-    -- Files that share a root directory will reuse the LSP server connection.
-    -- Nested lists indicate equal priority, see |vim.lsp.Config|.
-    root_markers = {  },
-    -- Specific settings to send to the server. The schema is server-defined.
-    -- Example: https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json
-    settings = {
-   }
-}
-
-vim.lsp.enable('luals')
+vim.lsp.enable('lua_ls')
 vim.lsp.enable('ols')
+vim.lsp.enable('pyright')
+
+--These GLOBAL keymaps are created unconditionally when Nvim starts:
+--- "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
+--- "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
+--- "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
+--- "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+--- "grt" is mapped in Normal mode to |vim.lsp.buf.type_definition()|
+--- "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
+--- CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|
+--- "an" and "in" are mapped in Visual mode to outer and inner incremental
+--  selections, respectively, using |vim.lsp.buf.selection_range()|
 
 
 
+
+-- we want some auto complete
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
+      vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+   end
+  end,
+})
+
+-- accept omni complete 
+vim.keymap.set('i','<C-u>','<C-y>')
