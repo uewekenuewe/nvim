@@ -120,6 +120,8 @@ vim.cmd("colorscheme vague")
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('ols')
 vim.lsp.enable('pyright')
+vim.lsp.enable('cobol')
+vim.lsp.enable('gopls')
 
 --These GLOBAL keymaps are created unconditionally when Nvim starts:
 --- "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
