@@ -79,8 +79,8 @@ vim.keymap.set({'n'}, "<leader>l", function ()
 	print("start lsp server")
     vim.lsp.start({
 	name = "cbl-lsp-go",
-	--cmd = { "/home/uwe/projects/cbl-lsp-go/cbl-lsp-go" },
-	cmd = { "c:\\projekte\\cbl-lsp-go\\bin\\cbl-lsp-go.exe" },
+	cmd = { "/home/T480/projects/cbl-lsp-go/bin/cbl-lsp-go" },
+	--cmd = { "c:\\projekte\\cbl-lsp-go\\bin\\cbl-lsp-go.exe" },
 	root_dir = vim.fn.getcwd(),
 })
 
