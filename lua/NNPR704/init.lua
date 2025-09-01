@@ -27,6 +27,9 @@ require("NNPR704.remap")
 -- colorsheme
 vim.cmd("colorscheme rose-pine-main")
 
+-- text width
+vim.cmd("set textwidth=80")
+
 -- line numbers
 vim.wo.relativenumber = true
 
