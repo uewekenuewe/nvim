@@ -23,12 +23,10 @@ vim.opt.smartcase = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.o.signcolumn = "yes"
-
 -- help help in full mode
 vim.o.helpheight=99999
 
--- remaps
---require('remap')
+-- ## REMAPS ## 
 -- splitting
 vim.keymap.set("n", "<leader>sv", ":vnew<CR>")
 vim.keymap.set("n", "<leader>sh", ":new<CR>")
@@ -39,11 +37,9 @@ vim.keymap.set("n", "<leader>yy", ":%y<CR>")
 -- leave hotkeys
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<F3>", ":bd!<CR>")
-
-
 -- save and quit 
 vim.keymap.set('n', '<c-s>', ":w!<CR>")
-vim.keymap.set('n', '<c-q>', ":q!<CR>")
+vim.keymap.set('n', '<c-q>', ":q!<CR>") -- \\TODO collides with visual block
 -- search 
 vim.keymap.set({ 'i', 'v', 'n' }, '<c-f>', ":/")
 -- general lsp remaps
@@ -76,8 +72,8 @@ end)
 - `]D` jumps to the last diagnostic in the buffer. |]D-default|
 - `[D` jumps to the first diagnostic in the buffer. |[D-default|
 - `<C-w>d` shows diagnostic at cursor in a floating window. |CTRL-W_d-default|
-
 --]]
+
 -- autocommands
 -- if diagnostic event updates come put them into quickfix list 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
@@ -107,10 +103,13 @@ vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
 
+local win_height = vim.api.nvim_win_get_height(0)
+local win_width = vim.api.nvim_win_get_width(0)
+
 require('telescope').setup{
     defaults = {
-        layout_strategy = 'horizontal',
-      layout_config = { height = 0.95 },
+        layout_strategy = 'vertical',
+      layout_config = { height = win_height, width = win_width },
     },
 }
 
@@ -134,15 +133,12 @@ vim.lsp.enable('gopls')
 --- "an" and "in" are mapped in Visual mode to outer and inner incremental
 --  selections, respectively, using |vim.lsp.buf.selection_range()|
 
-
-
-
 -- we want some auto complete
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
-      vim.opt.completeopt = { 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
+      vim.opt.completeopt = { 'preview', 'menu', 'menuone', 'noinsert', 'fuzzy', 'popup' }
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
    end
   end,
